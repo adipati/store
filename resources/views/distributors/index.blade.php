@@ -10,7 +10,22 @@
                 <div class="card-header">Distributor</div>
 
                 <div class="card-body">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add-distributor"><i class="fa fa-plus"></i> Tambah Distributor</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#add-distributor"><i class="fa fa-plus"></i> Tambah Distributor</button>
+                        </div>
+                        <div class="col-md-6">
+                            <form action="{{ route('distributors.search') }}" method="POST">
+                                {{ csrf_field() }}
+                                <div class="input-group md-3">
+                                    <input name="search" type="text" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i> Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <br><br>
                     <!-- Modal Tambah Dsitributor -->
                     <div class="modal fade" id="add-distributor" tabindex="-1" role="dialog">

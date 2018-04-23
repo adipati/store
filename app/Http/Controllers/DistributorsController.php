@@ -58,4 +58,11 @@ class DistributorsController extends Controller
         return redirect()->back()->with('success', 'Data Distributor berhasil dihapus.');
     }
 
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $distributors = Distributor::where('name', $search)->paginate(10);
+
+        return view('distributors.index', compact('distributors'));
+    }
+
 }

@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('distributors', 'DistributorsController');
+Route::post('distributors/search', 'DistributorsController@search')->name('distributors.search');
 Route::resource('products', 'ProductsController');
 Route::resource('transactions', 'TransactionsController');
 

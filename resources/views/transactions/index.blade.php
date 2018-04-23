@@ -29,10 +29,10 @@
                                 @foreach($transactions as $numb => $transaction)
                                 <tr>
                                     <td>{{ $numb+1 }}</td>
-                                    <td>{{ $transaction->sku }}</td>
-                                    <td>{{ $transaction->name }}</td>
-                                    <td>{{ $transaction->price }}</td>
-                                    <td>{{ $transaction->description }}</td>
+                                    <td>{{ $transaction->distributor->name }}</td>
+                                    <td>{{ $transaction->product->name }}</td>
+                                    <td>{{ $transaction->quatity }}</td>
+                                    <td>{{ $transaction->date }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit{{ $transaction->id }}"><i class="fa fa-edit"></i></button>
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ $transaction->id }}"><i class="fa fa-trash"></i></button>

@@ -22,13 +22,25 @@ class TransactionsController extends Controller
 
     public function create() {
         $products = Product::all();
-        $distributor = Distributor::all();
+        $distributors = Distributor::all();
 
         return view('transactions.create', compact('products', 'distributors'));
     }
 
     public function store(Request $request) {
+        $distributor = $request->input('distributor');
+        $date = $request->input('date');
+        $product = $request->input('product');
+        $quantity = $request->input('quantity');
 
+        $transaction = new Transaction();
+        $transaction->distributor_id = $distributor;
+        $transaction->product_id = $product;
+        $transaction->quantity = $quantity;
+        $transaction->date = $date;
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'Transaksi berhasil ditambahkan.');
     }
 
     public function show() {

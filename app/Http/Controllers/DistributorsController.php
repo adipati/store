@@ -18,6 +18,10 @@ class DistributorsController extends Controller
         return view('distributors.index', compact('distributors'));
     }
 
+    public function create() {
+        return view('distributors.create');
+    }
+
     public function store(Request $request) {
         $name = $request->input('name');
         $email = $request->input('email');
@@ -32,7 +36,7 @@ class DistributorsController extends Controller
         $distributor->city = $city;
         $distributor->save();
 
-        return redirect()->back()->with('success', 'Data Distributor berhasil ditambahkan.');
+        return redirect('distributors')->with('success', 'Data Distributor berhasil ditambahkan.');
     }
 
     public function update(Request $request, $id) {
@@ -49,7 +53,7 @@ class DistributorsController extends Controller
         $distributor->city = $city;
         $distributor->save();
 
-        return redirect()->back()->with('success', 'Data Distributor berhasil diperbarui.');
+        return redirect('distributors')->with('success', 'Data Distributor berhasil diperbarui.');
     }
 
     public function destroy($id) {
@@ -60,7 +64,11 @@ class DistributorsController extends Controller
 
     public function search(Request $request) {
         $search = $request->input('search');
-        $distributors = Distributor::where('name', $search)->paginate(10);
+        $distributors = Distributor::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        if(count($distributors) == 0) {
+            return view('distributors.index', compact('distributors'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');
+        }
 
         return view('distributors.index', compact('distributors'));
     }

@@ -18,11 +18,21 @@ class ProductsController extends Controller
         return view('products.index', compact('products'));
     }
 
+    public function create() {
+        return view('products.create');
+    }
+
     public function store(Request $request) {
         $name = $request->input('name');
         $sku = $request->input('sku');
         $description = $request->input('description');
         $price = $request->input('price');
+
+        $request->validate([
+            'sku' => 'unique:products,sku'
+        ], [
+            'sku.unique' => 'Nomor SKU sudah digunakan.'
+        ]);
 
         $product = new Product();
 
@@ -56,6 +66,17 @@ class ProductsController extends Controller
         $product = Product::destroy($id);
 
         return redirect()->back()->with('success', 'Produk terhapus.');
+    }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $products = Product::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        if(count($products) == 0) {
+            return view('products.index', compact('products'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');
+        }
+
+        return view('products.index', compact('products'));
     }
 
 }

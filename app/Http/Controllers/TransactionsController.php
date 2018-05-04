@@ -31,6 +31,7 @@ class TransactionsController extends Controller
         $distributor = $request->input('distributor');
         $date = $request->input('date');
         $product = $request->input('product');
+        $price = $request->input('price');
         $quantity = $request->input('quantity');
 
         $transaction = new Transaction();
@@ -39,6 +40,10 @@ class TransactionsController extends Controller
         $transaction->quantity = $quantity;
         $transaction->date = $date;
         $transaction->save();
+
+        $distributor = Distributor::find($distributor);
+        $distributor->point = $distributor->point+$quantity;
+        $distributor->save();
 
         return redirect()->back()->with('success', 'Transaksi berhasil ditambahkan.');
     }
@@ -52,6 +57,8 @@ class TransactionsController extends Controller
     }
 
     public function destroy($id) {
+        $transaction = Transaction::destroy($id);
 
+        return redirect()->back()->with('success', 'Data transaksi berhasil dihapus.');
     }
 }

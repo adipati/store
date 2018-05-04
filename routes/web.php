@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
+});
+Route::get('test', function () {
+    return view('test');
 });
 
 Auth::routes();
@@ -20,6 +23,7 @@ Auth::routes();
 Route::resource('distributors', 'DistributorsController');
 Route::post('distributors/search', 'DistributorsController@search')->name('distributors.search');
 Route::resource('products', 'ProductsController');
+Route::post('products/search', 'ProductsController@search')->name('products.search');
 Route::resource('transactions', 'TransactionsController');
 
 Route::get('/home', 'HomeController@index')->name('home');

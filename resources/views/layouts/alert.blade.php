@@ -1,7 +1,7 @@
 @if (count($errors) > 0)
 <div class="alert alert-warning alert-block" style="font-size:14px">
     <button type="button" class="close" data-dismiss="alert">×</button>
-    <h4><i class="fa fa-bell-alt"></i>Something Wrong!</h4>
+    <h4><i class="fa fa-bell-alt"></i>Terjadi kesalahan!</h4>
     <p><ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>

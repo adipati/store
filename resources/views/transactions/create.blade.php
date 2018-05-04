@@ -19,25 +19,29 @@
                                     <select name="distributor" id="" class="form-control">
                                         <option value=""></option>
                                         @foreach ($distributors as $distributor)
-                                        <option value="{{ $distributor->id }}">{{ $distributor->name }}</option>
+                                            <option value="{{ $distributor->id }}">{{ $distributor->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="price">
                                 <div class="form-group">
                                     <label for="">Pilih Tanggal</label>
-                                    <input name="date" type="text" class="form-control">
+                                    <div class="input-group datepicker">
+                                            <input type="text" class="form-control" id="date" placeholder="MM/DD/YYYY">
+                                        </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Pilih Product</label>
-                                    <select name="product" id="" class="form-control">
+                                    <select name="product" id="product" class="form-control select2">
                                         <option value=""></option>
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        <option value="{{ $product->id }}" data-harga="{{ $product->price }}">{{ $product->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="price">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
                                     <input name="quantity" type="number" class="form-control">
@@ -46,13 +50,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="float-right">
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('.select2').select2();
+            
+            $('#product').change(function(){
+                var harga = $('#product option:selected').data('harga');
+                $('input[name=price]').val(harga);
+            }).change();
+
+            $('#date').datepicker();
+        });
+    </script>
 @endsection

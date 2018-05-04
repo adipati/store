@@ -10,7 +10,7 @@
                 <div class="card-header">Transaksi</div>
 
                 <div class="card-body">                  
-                    <a href="{{ route('transactions.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Transaksi</a>
+                    <a href="{{ route('transactions.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Transaksi</a>
                     <br><br>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -31,7 +31,8 @@
                                     <td>{{ $numb+1 }}</td>
                                     <td>{{ $transaction->distributor->name }}</td>
                                     <td>{{ $transaction->product->name }}</td>
-                                    <td>{{ $transaction->quatity }}</td>
+                                    <td>{{ $transaction->price }}</td>
+                                    <td>{{ $transaction->quantity }}</td>
                                     <td>{{ $transaction->date }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit{{ $transaction->id }}"><i class="fa fa-edit"></i></button>
@@ -104,6 +105,12 @@
                             </tbody>
                         </table>
                         
+                        @if (count($transactions) < 1)
+                            <div class="alert alert-warning" role="alert">
+                                Data tidak ditemukan.
+                            </div>
+                        @endif
+
                         <div class="mx-auto">
                             {{ $transactions->links() }}
                         </div>

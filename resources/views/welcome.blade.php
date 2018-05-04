@@ -85,7 +85,7 @@
                 <div class="links">
                     <a href="{{ route('distributors.index') }}">Distributor</a>
                     <a href="{{ route('products.index') }}">Item Produk</a>
-                    <a href="https://laravel-news.com">Transaksi</a>
+                    <a href="{{ route('transactions.index') }}">Transaksi</a>
                 </div>
             </div>
         </div>

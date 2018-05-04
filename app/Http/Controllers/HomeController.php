@@ -26,6 +26,6 @@ class HomeController extends Controller
     {
         $distributors = Distributor::all();
 
-        return view('home');
+        return view('welcome');
     }
 }

@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label for="">Pilih Tanggal</label>
                                     <div class="input-group datepicker">
-                                            <input type="text" class="form-control" id="date" placeholder="MM/DD/YYYY">
+                                            <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
                                         </div>
                                 </div>
                             </div>
@@ -60,14 +60,16 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            $('.select2').select2();
+            // $('.select2').select2();
             
             $('#product').change(function(){
                 var harga = $('#product option:selected').data('harga');
                 $('input[name=price]').val(harga);
             }).change();
 
-            $('#date').datepicker();
+            $('#datepicker').datepicker({
+      autoclose: true
+    })
         });
     </script>
 @endsection

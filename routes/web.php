@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('login');
 });
 Route::get('test', function () {
-    return view('test');
+    return view('layouts.lte');
 });
 
 Auth::routes();

@@ -1,63 +1,57 @@
-@extends('layouts.app')
+@extends('layouts.lte')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            @include('layouts.menu')
+<section class="content-header">
+    <h1>
+        Distributor Management
+    </h1>
+</section>
 
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        Tambah Distributor
+<section class="content">
+    @include('layouts.alert')
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tambah Data Distributor</h3>
+        </div>
+        <form action="{{ route('distributors.store') }}" class="form-horizontal" method="POST">
+            <div class="box-body">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Nama Distributor</label>
+                    <div class="col-md-10">
+                        <input type="text" name="name" class="form-control">
                     </div>
-                    <div class="card-body">
-                        <form action="{{ route('distributors.store') }}" method="POST">
-                            {{ csrf_field() }}
-                            
-                            <div class="form-group">
-                                <label for="">Nama</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" name="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">No. Telepon</label>
-                                <input type="text" name="phone" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Kota</label>
-                                <input type="text" name="city" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Point</label>
-                                <input type="number" name="point" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Status</label>
-                                                             
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                <label class="form-check-label" for="gridRadios1">
-                                  First radio
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                <label class="form-check-label" for="gridRadios2">
-                                  Second radio
-                                </label>
-                              </div>
-
-                            
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                        </form>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Alamat Email</label>
+                    <div class="col-md-10">
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Nomor Telepon</label>
+                    <div class="col-md-10">
+                        <input type="text" name="phone" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Kota</label>
+                    <div class="col-md-10">
+                        <input type="text" name="city" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Status</label>
+                    <div class="col-md-10">
+                        <input type="text" name="status" class="form-control">
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="box-footer">
+                <button class="btn btn-success btn-sm pull-right margin" type="submit"><i class="fa fa-check"></i> Simpan</button>
+                <button class="btn btn-warning btn-sm pull-right margin" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+            </div>
+        </form>
     </div>
+</section>
 @endsection

@@ -13,7 +13,7 @@ class DistributorsController extends Controller
     }
     
     public function index() {
-        $distributors = Distributor::paginate(5);
+        $distributors = Distributor::paginate(15);
 
         return view('distributors.index', compact('distributors'));
     }
@@ -22,11 +22,30 @@ class DistributorsController extends Controller
         return view('distributors.create');
     }
 
+    public function edit($id) {
+        $distributor = Distributor::find($id);
+        
+        return view('distributors.edit', compact('distributor'));
+    }
+
     public function store(Request $request) {
         $name = $request->input('name');
         $email = $request->input('email');
         $phone = $request->input('phone');
         $city = $request->input('city');
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
+        ],[
+            'name.required' => 'Nama Distributor belum diisi',
+            'email.required' => 'Alamat Email belum diisi',
+            'email.email' => 'Alamat Email tidak valid',
+            'phone.required' => 'Nomor Telepon belum diisi',
+            'city.required' => 'Kota belum diisi',
+        ]);
 
         $distributor = new Distributor();
 

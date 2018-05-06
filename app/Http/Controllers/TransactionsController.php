@@ -61,4 +61,15 @@ class TransactionsController extends Controller
 
         return redirect()->back()->with('success', 'Data transaksi berhasil dihapus.');
     }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $transactions = Transaction::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        if(count($transactions) == 0) {
+            return view('transactions.index', compact('transactions'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');
+        }
+
+        return view('transactions.index', compact('transactions'));
+    }
 }

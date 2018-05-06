@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('login');
 });
 Route::get('test', function () {
-    return view('layouts.lte');
+    return view('test');
 });
 
 Auth::routes();
@@ -25,5 +25,6 @@ Route::post('distributors/search', 'DistributorsController@search')->name('distr
 Route::resource('products', 'ProductsController');
 Route::post('products/search', 'ProductsController@search')->name('products.search');
 Route::resource('transactions', 'TransactionsController');
+Route::post('transactions/search', 'TransactionsController@search')->name('transactions.search');
 
 Route::get('/home', 'HomeController@index')->name('home');

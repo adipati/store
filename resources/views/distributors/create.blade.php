@@ -43,13 +43,15 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Status</label>
                     <div class="col-md-10">
-                        <input type="text" name="status" class="form-control">
+                        <select class="form-control" name="status" id="">
+                            <option value="1">Aktif</option>
+                            <option value="0">Non Aktif</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="box-footer">
-                <button class="btn btn-success btn-sm pull-right margin" type="submit"><i class="fa fa-check"></i> Simpan</button>
-                <button class="btn btn-warning btn-sm pull-right margin" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+                <button class="btn btn-success btn-sm pull-right" type="submit"><i class="fa fa-check"></i> Simpan</button>
             </div>
         </form>
     </div>

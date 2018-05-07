@@ -82,8 +82,8 @@ class DistributorsController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->input('search');
-        $distributors = Distributor::where('name', 'like', '%'.$search.'%')->paginate(10);
+        $search = $request->get('search');
+        $distributors = Distributor::where('name', 'like', '%'.$search.'%')->paginate(15);
 
         if(count($distributors) == 0) {
             return view('distributors.index', compact('distributors'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');

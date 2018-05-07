@@ -12,7 +12,7 @@
     @include('layouts.alert')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Daftar product</h3>
+            <h3 class="box-title">Daftar Produk</h3>
             <div class="box-tools">
                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Data Produk</a>
             </div>

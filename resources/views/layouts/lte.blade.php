@@ -103,8 +103,16 @@
                                     <div class="pull-left">
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <div class="pull-right">                                        
+                                        <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+    
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -119,20 +127,18 @@
             <section class="sidebar">
                 <!-- search form -->
                 @if (Request::segment(1)=='distributors')
-                    <form action="{{ route('distributors.search') }}" method="POST" class="sidebar-form">
-                        {{ csrf_field() }}
+                    <form action="{{ route('distributors.search') }}" method="GET" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Cari Distributor...">
                             <span class="input-group-btn">
-                                <button type="submit" name="search" class="btn btn-flat">
+                                <button type="submit" class="btn btn-flat">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                         </div>
                     </form>                                        
                 @elseif (Request::segment(1)=='products')
-                    <form action="{{ route('products.search') }}" method="POST" class="sidebar-form">
-                        {{ csrf_field() }}
+                    <form action="{{ route('products.search') }}" method="GET" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Cari Produk...">
                             <span class="input-group-btn">
@@ -144,12 +150,11 @@
                     </form>                    
                 
                 @elseif (Request::segment(1)=='transactions')
-                    <form action="{{ route('transactions.search') }}" method="POST" class="sidebar-form">
-                        {{ csrf_field() }}
+                    <form action="{{ route('transactions.search') }}" method="GET" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Cari Transaksi...">
                             <span class="input-group-btn">
-                                <button type="submit" name="search" class="btn btn-flat">
+                                <button type="submit" class="btn btn-flat">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -160,8 +165,8 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>                    
-                    <li>
-                        <a href="../calendar.html">
+                    <li {{ Request::segment(1)=='dashboard' ? 'class=active' : '' }}>
+                        <a href="{{ route('dashboard') }}">
                             <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span>
                         </a>

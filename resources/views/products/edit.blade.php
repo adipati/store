@@ -13,7 +13,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Tambah Data Produk</h3>
         </div>
-        <form action="{{ route('distributors.update', $product->id) }}" class="form-horizontal" method="POST">
+        <form action="{{ route('products.update', $product->id) }}" class="form-horizontal" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <div class="box-body">
                 {{ csrf_field() }}
@@ -32,25 +32,18 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Harga</label>
                     <div class="col-md-10">
-                        <input type="text" name="phone" class="form-control" value="{{ $product->phone }}">
+                        <input type="text" name="price" class="form-control" value="{{ $product->price }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Deskripsi</label>
                     <div class="col-md-10">
-                        <input type="text" name="city" class="form-control" value="{{ $product->city }}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">Status</label>
-                    <div class="col-md-10">
-                        <input type="text" name="status" class="form-control" value="{{ $product->status }}">
+                        <textarea name="description" id="" cols="30" rows="5" class="form-control">{{ $product->description }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="box-footer">
-                <button class="btn btn-success btn-sm pull-right margin" type="submit"><i class="fa fa-check"></i> Simpan</button>
-                <button class="btn btn-warning btn-sm pull-right margin" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+                <button class="btn btn-success btn-sm pull-right" type="submit"><i class="fa fa-check"></i> Simpan</button>
             </div>
         </form>
     </div>

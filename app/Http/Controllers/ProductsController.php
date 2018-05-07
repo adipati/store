@@ -45,7 +45,7 @@ class ProductsController extends Controller
         $product->price = $price;
         $product->save();
 
-        return redirect()->back()->with('success', 'Berhasil meanmbahkan produk '.$name);
+        return redirect('products')->with('success', 'Berhasil meanmbahkan produk '.$name);
     }
 
     public function edit($id) {
@@ -68,7 +68,7 @@ class ProductsController extends Controller
         $product->price = $price;
         $product->save();
 
-        return redirect()->back()->with('success', 'Berhasil update data '.$name);
+        return redirect('products')->with('success', 'Berhasil update data '.$name);
     }
 
     public function destroy($id) {
@@ -78,7 +78,7 @@ class ProductsController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->input('search');
+        $search = $request->get('search');
         $products = Product::where('name', 'like', '%'.$search.'%')->paginate(10);
 
         if(count($products) == 0) {

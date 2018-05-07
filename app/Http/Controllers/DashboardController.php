@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use App\Distributor;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $distributors = Distributor::all();
+        $distributors = count(Distributor::all());
+        $products = count(Product::all());
 
-        return view('welcome');
+        return view('home', compact('distributors', 'products'));
     }
 }

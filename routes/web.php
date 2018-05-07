@@ -20,11 +20,16 @@ Route::get('test', function () {
 
 Auth::routes();
 
-Route::resource('distributors', 'DistributorsController');
-Route::post('distributors/search', 'DistributorsController@search')->name('distributors.search');
-Route::resource('products', 'ProductsController');
-Route::post('products/search', 'ProductsController@search')->name('products.search');
-Route::resource('transactions', 'TransactionsController');
-Route::post('transactions/search', 'TransactionsController@search')->name('transactions.search');
+// Distributor
+Route::resource('distributors', 'DistributorsController')->except(['show']);
+// Produk
+Route::resource('products', 'ProductsController')->except(['show']);
+// Transacsi
+Route::resource('transactions', 'TransactionsController')->except(['show']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Pencarian
+Route::get('products/search', 'ProductsController@search')->name('products.search');
+Route::get('distributors/search', 'DistributorsController@search')->name('distributors.search');
+Route::get('transactions/search', 'TransactionsController@search')->name('transactions.search');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

@@ -26,7 +26,6 @@
                         <th>Alamat Email</th>
                         <th>No. Telepon</th>
                         <th>Kota</th>
-                        <th>Point</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -39,7 +38,6 @@
                         <td>{{ $distributor->email }}</td>
                         <td>{{ $distributor->phone }}</td>
                         <td>{{ $distributor->city }}</td>
-                        <td>{{ $distributor->point }}</td>
                         <td><span class="label {{ $distributor->status==1 ? 'label-success' : 'label-warning' }}">{{ $distributor->status==1 ? 'Aktif' : 'Non Aktif' }}</span></td>
                         <td>
                             <a href="{{ route('distributors.edit', $distributor->id) }}" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i> Edit</a>

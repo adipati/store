@@ -10,7 +10,7 @@ class Product extends Model
     use SoftDeletes;
     protected $date = ['deleted_at'];
     
-    public function transactions() {
-        return $this->hasMany('App\Transaction');
+    public function order() {
+        return $this->hasMany('App\Order');
     }
 }

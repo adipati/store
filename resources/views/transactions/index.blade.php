@@ -19,11 +19,8 @@
                     <tr>
                         <th>#</th>
                         <th>Nama Distributor</th>
-                        <th>Nama Produk</th>
-                        <th>Jumlah</th>
-                        <th>Harga Satuan</th>
-                        <th>Total</th>
                         <th>Tanggal Transaksi</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,11 +28,10 @@
                         <tr>
                             <td>{{ $numb+1 }}</td>
                             <td>{{ $transaction->distributor->name }}</td>
-                            <td>{{ $transaction->product->name }}</td>
-                            <td>{{ $transaction->quantity }}</td>
-                            <td>{{ $transaction->price }}</td>
-                            <td>{{ $transaction->price*$transaction->quantity }}</td>
                             <td>{{ $transaction->date }}</td>
+                            <td>
+                                    <a href="{{ route('transactions.show', $transaction->id) }}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Lihat Detail</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

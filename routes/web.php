@@ -25,7 +25,7 @@ Route::resource('distributors', 'DistributorsController')->except(['show']);
 // Produk
 Route::resource('products', 'ProductsController')->except(['show']);
 // Transacsi
-Route::resource('transactions', 'TransactionsController')->except(['show']);
+Route::resource('transactions', 'TransactionsController');
 
 // Pencarian
 Route::get('products/search', 'ProductsController@search')->name('products.search');

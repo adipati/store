@@ -33,6 +33,7 @@ class DistributorsController extends Controller
         $email = $request->input('email');
         $phone = $request->input('phone');
         $city = $request->input('city');
+        $status = $request->input('status');
 
         $request->validate([
             'name' => 'required',
@@ -53,6 +54,7 @@ class DistributorsController extends Controller
         $distributor->email = $email;
         $distributor->phone = $phone;
         $distributor->city = $city;
+        $distributor->status = $status;
         $distributor->save();
 
         return redirect('distributors')->with('success', 'Data Distributor berhasil ditambahkan.');
@@ -63,6 +65,7 @@ class DistributorsController extends Controller
         $email = $request->input('email');
         $phone = $request->input('phone');
         $city = $request->input('city');
+        $status = $request->input('status');
 
         $distributor = Distributor::find($id);
         
@@ -70,6 +73,7 @@ class DistributorsController extends Controller
         $distributor->email = $email;
         $distributor->phone = $phone;
         $distributor->city = $city;
+        $distributor->status = $status;
         $distributor->save();
 
         return redirect('distributors')->with('success', 'Data Distributor berhasil diperbarui.');

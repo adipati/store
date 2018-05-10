@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Product;
 use App\Distributor;
 use App\Transaction;
@@ -33,23 +34,29 @@ class TransactionsController extends Controller
         $product = $request->input('product');
         $price = $request->input('price');
         $quantity = $request->input('quantity');
-
+        $count = count($product);
+        
         $transaction = new Transaction();
         $transaction->distributor_id = $distributor;
-        $transaction->product_id = $product;
-        $transaction->quantity = $quantity;
         $transaction->date = $date;
         $transaction->save();
-
-        $distributor = Distributor::find($distributor);
-        $distributor->point = $distributor->point+$quantity;
-        $distributor->save();
+        
+        for($i=0; $i < $count; $i++) {
+            $order = new Order();
+            $order->transaction_id = $transaction->id;
+            $order->product_id = $product[$i];
+            $order->price = Product::find($product[$i])->price;
+            $order->quantity = $quantity[$i];
+            $order->save();
+        }
 
         return redirect()->back()->with('success', 'Transaksi berhasil ditambahkan.');
     }
 
-    public function show() {
+    public function show($id) {
+        $transaction = Transaction::find($id);
 
+         return view('transactions.show', compact('transaction'));
     }
 
     public function update(Request $request, $id) {

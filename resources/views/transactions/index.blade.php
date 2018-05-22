@@ -20,15 +20,23 @@
                         <th>#</th>
                         <th>Nama Distributor</th>
                         <th>Tanggal Transaksi</th>
+                        <th>Total Transaksi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($transactions as $numb => $transaction)
+                    <? $total=0; ?>
                         <tr>
                             <td>{{ $numb+1 }}</td>
                             <td>{{ $transaction->distributor->name }}</td>
                             <td>{{ $transaction->date }}</td>
+                            <td>
+                                @foreach ($transaction->orders as $order)
+                                    <? $total = $total + ($order->price*$order->quantity) ?>
+                                @endforeach
+                                Rp. {{ $total }}
+                            </td>
                             <td>
                                     <a href="{{ route('transactions.show', $transaction->id) }}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> Lihat Detail</a>
                             </td>

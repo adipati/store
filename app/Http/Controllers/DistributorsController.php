@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Distributor;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,16 @@ class DistributorsController extends Controller
     }
     
     public function index() {
-        $distributors = Distributor::paginate(15);
+        $distributors = Distributor::with('transactions')->paginate(15);
+        // $distributors = DB::table('distributors')
+        //     ->join('transactions', function($join) {
+        //         $join->on('distributors.id', '=', 'transactions.distributor_id')
+        //             ->distinct()
+        //             ->get(['distributor_id']);
+        //     })
+        //     ->paginate(15);
+
+        // dd($distributors);
 
         return view('distributors.index', compact('distributors'));
     }

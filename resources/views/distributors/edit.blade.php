@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Distributor Management
+        Avostore Management
     </h1>
 </section>
 
@@ -11,7 +11,7 @@
     @include('layouts.alert')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Tambah Data Distributor</h3>
+            <h3 class="box-title">Edit Data Avostore</h3>
         </div>
         <form action="{{ route('distributors.update', $distributor->id) }}" class="form-horizontal" method="POST">
             <input type="hidden" name="_method" value="PUT">

@@ -11,10 +11,10 @@
             <div class="info-box">
                 <a href="{{ route('distributors.index') }}">
                     <span class="info-box-icon bg-aqua">
-                        <i class="ion ion-paper-airplane"></i>
+                        <i class="ion ion-clipboard"></i>
                     </span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Jumlah Distributor</span>
+                        <span class="info-box-text">Jumlah Avostore</span>
                         <span class="info-box-number">{{$distributors}}</span>
                     </div>
                 </a>
@@ -37,7 +37,7 @@
             <div class="info-box">
                 <a href="{{ route('transactions.index') }}">
                     <span class="info-box-icon bg-orange">
-                        <i class="ion ion-cart"></i>
+                        <i class="ion ion-clipboard"></i>
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Jumlah Transaksi</span>

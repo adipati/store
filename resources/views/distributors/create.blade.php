@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Distributor Management
+        Avostore Management
     </h1>
 </section>
 
@@ -11,13 +11,13 @@
     @include('layouts.alert')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Tambah Data Distributor</h3>
+            <h3 class="box-title">Tambah Data Avostore</h3>
         </div>
         <form action="{{ route('distributors.store') }}" class="form-horizontal" method="POST">
             <div class="box-body">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">Nama Distributor</label>
+                    <label for="" class="col-sm-2 control-label">Nama Avostore</label>
                     <div class="col-md-10">
                         <input type="text" name="name" class="form-control">
                     </div>

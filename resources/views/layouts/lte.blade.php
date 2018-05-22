@@ -71,32 +71,15 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        {{ Auth::user()->name }}
+                                        <small>{{ Auth::user()->email }}</small>
                                     </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
@@ -174,7 +157,7 @@
                     <li {{ Request::segment(1)=='distributors' ? 'class=active' : '' }}>
                         <a href="{{ route('distributors.index') }}">
                             <i class="fa fa-truck"></i>
-                            <span>Distributor</span>
+                            <span>Avostore</span>
                         </a>
                     </li>
                     <li {{ Request::segment(1)=='products' ? 'class=active' : '' }}>

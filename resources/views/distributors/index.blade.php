@@ -4,7 +4,7 @@
 
 <section class="content-header">
     <h1>
-        Distributor Management
+        Avostore Management
     </h1>
 </section>
 
@@ -12,9 +12,9 @@
     @include('layouts.alert')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Daftar Distributor</h3>
+            <h3 class="box-title">Daftar Avostore</h3>
             <div class="box-tools">
-                <a href="{{ route('distributors.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Data Distributor</a>
+                <a href="{{ route('distributors.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Data Avostore</a>
             </div>
         </div>
         <div class="box-body table-responsive no-padding">
@@ -22,10 +22,11 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nama Distributor</th>
+                        <th>Nama Avostore</th>
                         <th>Alamat Email</th>
                         <th>No. Telepon</th>
                         <th>Kota</th>
+                        <th>Terakhir Transaksi</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -38,6 +39,7 @@
                         <td>{{ $distributor->email }}</td>
                         <td>{{ $distributor->phone }}</td>
                         <td>{{ $distributor->city }}</td>
+                        <td>{{ $distributor }}</td>
                         <td><span class="label {{ $distributor->status==1 ? 'label-success' : 'label-warning' }}">{{ $distributor->status==1 ? 'Aktif' : 'Non Aktif' }}</span></td>
                         <td>
                             <a href="{{ route('distributors.edit', $distributor->id) }}" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i> Edit</a>
@@ -47,7 +49,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Update distributor {{ $distributor->name }}</h5>
+                                            <h5 class="modal-title">Update Avostore {{ $distributor->name }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         
@@ -87,7 +89,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Hapus distributor {{ $distributor->name }}</h5>
+                                            <h5 class="modal-title">Hapus Avostore {{ $distributor->name }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         

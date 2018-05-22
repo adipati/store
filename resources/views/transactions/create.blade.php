@@ -26,34 +26,29 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="date" class="form-control datepicker">
+                            <input type="text" name="date" class="form-control datepicker" placeholder="Tanggal Transaksi">
                         </div>
                         <button class="btn btn-sm btn-success btn-flat"><i class="fa fa-check"></i> Simpan</button>
                     </div>
                     <div class="form-field col-md-6">
                         <label for="">Pembelian Item</label>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <select name="product[]" class="product form-control select2">
+                                    <select name="product[]" class="product form-control">
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}" data-price="{{ $product->price }}">{{ $product->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <input name="price[]" disabled class="form-control">
-                                </div>                                
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <input name="quantity[]" type="number" class="form-control">
                                 </div>                                
                             </div>
                             <div class="col-md-1">
-                                <button type="button" id="add-field" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                <button type="button" id="add-field" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -81,7 +76,7 @@
 
             $('#add-field').click(function() {
                 $('.form-field').append('<div class="row field">'
-                            +'<div class="col-md-5">'
+                            +'<div class="col-md-6">'
                                 +'<div class="form-group">'
                                     +'<select name="product[]" class="product form-control select2">'
                                         +'@foreach ($products as $product)'
@@ -90,18 +85,13 @@
                                     +'</select>'
                                 +'</div>'
                             +'</div>'
-                            +'<div class="col-md-3">'
-                                +'<div class="form-group">'
-                                    +'<input name="price[]" disabled class="form-control">'
-                                +'</div>'
-                            +'</div>'
-                            +'<div class="col-md-3">'
+                            +'<div class="col-md-5">'
                                 +'<div class="form-group">'
                                     +'<input name="quantity[]" type="number" class="form-control">'
                                 +'</div>'
                             +'</div>'
                             +'<div class="col-md-1">'
-                                +'<button type="button" class="remove btn btn-sm btn-danger"><i class="fa fa-close"></i></button>'
+                                +'<button type="button" class="remove btn btn-sm btn-danger btn-flat"><i class="fa fa-close"></i></button>'
                             +'</div>'
                         +'</div>')
             })

@@ -16,9 +16,10 @@ class TransactionsController extends Controller
     }
     
     public function index() {
-        $transactions = Transaction::paginate(10);
+        $transactions = Transaction::with('orders')->paginate(10);
+        $total = Order::select('price')->get();
 
-        return view('transactions.index', compact('transactions'));
+        return view('transactions.index', compact('transactions', 'total'));
     }
 
     public function create() {

@@ -1,73 +1,110 @@
-@extends('layouts.app')
+@extends('layouts.lte')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        @include('layouts.menu')
-        <div class="col-md-8">
-            @include('layouts.alert')
-            <div class="card">
-                <div class="card-header">Tambah Transaksi</div>
+<section class="content-header">
+    <h1>Transaksi Management</h1>
+</section>
 
-                <form action="{{ route('transactions.store') }}" method="POST">
-                    <div class="card-body">
+<section class="content">
+    @include('layouts.alert')
+    
+    <div class="box">
+        <form action="{{ route('transactions.store') }}" method="POST">
+            {{ csrf_field() }}
+            <div class="box-header with-border">
+                <h3 class="box-title">Tambah Data Transaksi</h3>
+            </div>
+            <form class="form" action="">
+                <div class="box-body">
+                    <div class="col-md-6">
+                        <label for="">Transaksi oleh:</label>
+                        <div class="form-group">
+                            <select name="distributor" class="form-control select2">
+                                @foreach ($distributors as $distributor)
+                                    <option value="{{ $distributor->id }}">{{ $distributor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="date" class="form-control datepicker" placeholder="Tanggal Transaksi">
+                        </div>
+                        <button class="btn btn-sm btn-success btn-flat"><i class="fa fa-check"></i> Simpan</button>
+                    </div>
+                    <div class="form-field col-md-6">
+                        <label for="">Pembelian Item</label>
                         <div class="row">
-                            {{ csrf_field() }}
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Pilih Distributor</label>
-                                    <select name="distributor" id="" class="form-control">
-                                        <option value=""></option>
-                                        @foreach ($distributors as $distributor)
-                                            <option value="{{ $distributor->id }}">{{ $distributor->name }}</option>
+                                    <select name="product[]" class="product form-control">
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}" data-price="{{ $product->price }}">{{ $product->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <input type="hidden" name="price">
-                                <div class="form-group">
-                                    <label for="">Pilih Tanggal</label>
-                                    <div class="input-group datepicker">
-                                            <input type="text" class="form-control" id="date" placeholder="MM/DD/YYYY">
-                                        </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="">Pilih Product</label>
-                                    <select name="product" id="product" class="form-control select2">
-                                        <option value=""></option>
-                                        @foreach ($products as $product)
-                                        <option value="{{ $product->id }}" data-harga="{{ $product->price }}">{{ $product->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <input type="hidden" name="price">
-                                <div class="form-group">
-                                    <label for="">Jumlah</label>
-                                    <input name="quantity" type="number" class="form-control">
+                                    <input name="quantity[]" type="number" class="form-control">
                                 </div>                                
-                                <button class="btn btn-block btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" id="add-field" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
+                </div>
+                <div class="box-footer">
+    
+                </div>
+            </form>
+        </form>
     </div>
-</div>
+</section>
 @endsection
 
 @section('script')
     <script>
-        $(document).ready(function(){
-            $('.select2').select2();
-            
-            $('#product').change(function(){
-                var harga = $('#product option:selected').data('harga');
-                $('input[name=price]').val(harga);
-            }).change();
+        $(document).ready(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
 
-            $('#date').datepicker();
-        });
+            //Date picker
+            $('.datepicker').datepicker({
+                autoclose: true,
+                format: 'yyyy-mm-dd'
+            })
+
+            $('#add-field').click(function() {
+                $('.form-field').append('<div class="row field">'
+                            +'<div class="col-md-6">'
+                                +'<div class="form-group">'
+                                    +'<select name="product[]" class="product form-control select2">'
+                                        +'@foreach ($products as $product)'
+                                            +'<option value="{{ $product->id }}" data-price="{{ $product->price }}">{{ $product->name }}</option>'
+                                        +'@endforeach'
+                                    +'</select>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md-5">'
+                                +'<div class="form-group">'
+                                    +'<input name="quantity[]" type="number" class="form-control">'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md-1">'
+                                +'<button type="button" class="remove btn btn-sm btn-danger btn-flat"><i class="fa fa-close"></i></button>'
+                            +'</div>'
+                        +'</div>')
+            })
+
+            $('.content').on('click', '.remove', function() {
+                $(this).closest('.row.field').remove()
+            })
+
+            $('.product').change(function(){
+                var harga = $('.product option:selected').data('price');
+                $('input[name=price]').val(harga);
+            }).change()
+            
+        })
     </script>
 @endsection

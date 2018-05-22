@@ -21,14 +21,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('image/logo.png') }}" alt="Responsive Image" class="img-fluid" width="20%" height="auto">
+                    {{-- <img src="{{ asset('image/logo.png') }}" alt="Responsive Image" class="img-fluid" width="20%" height="auto"> --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -79,7 +78,7 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
-<script src="{{ asset('js/datepicker.min.js') }}"></script>
+<script src="{{ asset('datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('script')
 </html>

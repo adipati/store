@@ -13,7 +13,7 @@ class ProductsController extends Controller
     }
 
     public function index() {
-        $products = Product::paginate(5);
+        $products = Product::paginate(15);
 
         return view('products.index', compact('products'));
     }
@@ -29,7 +29,10 @@ class ProductsController extends Controller
         $price = $request->input('price');
 
         $request->validate([
-            'sku' => 'unique:products,sku'
+            'sku' => 'required|unique:products,sku',
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
         ], [
             'sku.unique' => 'Nomor SKU sudah digunakan.'
         ]);
@@ -42,7 +45,13 @@ class ProductsController extends Controller
         $product->price = $price;
         $product->save();
 
-        return redirect()->back()->with('success', 'Berhasil meanmbahkan produk '.$name);
+        return redirect('products')->with('success', 'Berhasil meanmbahkan produk '.$name);
+    }
+
+    public function edit($id) {
+        $product = Product::find($id);
+
+        return view('products.edit', compact('product'));
     }
 
     public function update(Request $request, $id) {
@@ -59,7 +68,7 @@ class ProductsController extends Controller
         $product->price = $price;
         $product->save();
 
-        return redirect()->back()->with('success', 'Berhasil update data '.$name);
+        return redirect('products')->with('success', 'Berhasil update data '.$name);
     }
 
     public function destroy($id) {
@@ -69,7 +78,7 @@ class ProductsController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->input('search');
+        $search = $request->get('search');
         $products = Product::where('name', 'like', '%'.$search.'%')->paginate(10);
 
         if(count($products) == 0) {

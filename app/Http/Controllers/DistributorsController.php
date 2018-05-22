@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Distributor;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,16 @@ class DistributorsController extends Controller
     }
     
     public function index() {
-        $distributors = Distributor::paginate(5);
+        $distributors = Distributor::with('transactions')->paginate(15);
+        // $distributors = DB::table('distributors')
+        //     ->join('transactions', function($join) {
+        //         $join->on('distributors.id', '=', 'transactions.distributor_id')
+        //             ->distinct()
+        //             ->get(['distributor_id']);
+        //     })
+        //     ->paginate(15);
+
+        // dd($distributors);
 
         return view('distributors.index', compact('distributors'));
     }
@@ -22,11 +32,31 @@ class DistributorsController extends Controller
         return view('distributors.create');
     }
 
+    public function edit($id) {
+        $distributor = Distributor::find($id);
+        
+        return view('distributors.edit', compact('distributor'));
+    }
+
     public function store(Request $request) {
         $name = $request->input('name');
         $email = $request->input('email');
         $phone = $request->input('phone');
         $city = $request->input('city');
+        $status = $request->input('status');
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
+        ],[
+            'name.required' => 'Nama Distributor belum diisi',
+            'email.required' => 'Alamat Email belum diisi',
+            'email.email' => 'Alamat Email tidak valid',
+            'phone.required' => 'Nomor Telepon belum diisi',
+            'city.required' => 'Kota belum diisi',
+        ]);
 
         $distributor = new Distributor();
 
@@ -34,6 +64,7 @@ class DistributorsController extends Controller
         $distributor->email = $email;
         $distributor->phone = $phone;
         $distributor->city = $city;
+        $distributor->status = $status;
         $distributor->save();
 
         return redirect('distributors')->with('success', 'Data Distributor berhasil ditambahkan.');
@@ -44,6 +75,7 @@ class DistributorsController extends Controller
         $email = $request->input('email');
         $phone = $request->input('phone');
         $city = $request->input('city');
+        $status = $request->input('status');
 
         $distributor = Distributor::find($id);
         
@@ -51,6 +83,7 @@ class DistributorsController extends Controller
         $distributor->email = $email;
         $distributor->phone = $phone;
         $distributor->city = $city;
+        $distributor->status = $status;
         $distributor->save();
 
         return redirect('distributors')->with('success', 'Data Distributor berhasil diperbarui.');
@@ -63,8 +96,8 @@ class DistributorsController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->input('search');
-        $distributors = Distributor::where('name', 'like', '%'.$search.'%')->paginate(10);
+        $search = $request->get('search');
+        $distributors = Distributor::where('name', 'like', '%'.$search.'%')->paginate(15);
 
         if(count($distributors) == 0) {
             return view('distributors.index', compact('distributors'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');

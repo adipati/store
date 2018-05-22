@@ -11,7 +11,7 @@
 @endif
 
 @if(Session::has('success'))
-<div class="alert alert-success alert-block" style="font-size:14px;text-align:center">
+<div class="alert alert-info alert-block" style="font-size:14px;text-align:center">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <i class="fa fa-bell-alt"></i>{{Session::get('success')}}
 </div>

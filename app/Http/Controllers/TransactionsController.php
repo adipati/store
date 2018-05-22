@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Product;
 use App\Distributor;
 use App\Transaction;
@@ -15,9 +16,10 @@ class TransactionsController extends Controller
     }
     
     public function index() {
-        $transactions = Transaction::paginate(10);
+        $transactions = Transaction::with('orders')->paginate(10);
+        $total = Order::select('price')->get();
 
-        return view('transactions.index', compact('transactions'));
+        return view('transactions.index', compact('transactions', 'total'));
     }
 
     public function create() {
@@ -33,23 +35,29 @@ class TransactionsController extends Controller
         $product = $request->input('product');
         $price = $request->input('price');
         $quantity = $request->input('quantity');
-
+        $count = count($product);
+        
         $transaction = new Transaction();
         $transaction->distributor_id = $distributor;
-        $transaction->product_id = $product;
-        $transaction->quantity = $quantity;
         $transaction->date = $date;
         $transaction->save();
-
-        $distributor = Distributor::find($distributor);
-        $distributor->point = $distributor->point+$quantity;
-        $distributor->save();
+        
+        for($i=0; $i < $count; $i++) {
+            $order = new Order();
+            $order->transaction_id = $transaction->id;
+            $order->product_id = $product[$i];
+            $order->price = Product::find($product[$i])->price;
+            $order->quantity = $quantity[$i];
+            $order->save();
+        }
 
         return redirect()->back()->with('success', 'Transaksi berhasil ditambahkan.');
     }
 
-    public function show() {
+    public function show($id) {
+        $transaction = Transaction::find($id);
 
+         return view('transactions.show', compact('transaction'));
     }
 
     public function update(Request $request, $id) {
@@ -60,5 +68,16 @@ class TransactionsController extends Controller
         $transaction = Transaction::destroy($id);
 
         return redirect()->back()->with('success', 'Data transaksi berhasil dihapus.');
+    }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $transactions = Transaction::where('name', 'like', '%'.$search.'%')->paginate(10);
+
+        if(count($transactions) == 0) {
+            return view('transactions.index', compact('transactions'))->with('error', 'Pencarian '.$search.' tidak ditemukan.');
+        }
+
+        return view('transactions.index', compact('transactions'));
     }
 }

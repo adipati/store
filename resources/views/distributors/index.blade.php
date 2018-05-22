@@ -39,7 +39,7 @@
                         <td>{{ $distributor->email }}</td>
                         <td>{{ $distributor->phone }}</td>
                         <td>{{ $distributor->city }}</td>
-                        <td>{{ $distributor }}</td>
+                        <td>{{ $distributor->last_transaction }}</td>
                         <td><span class="label {{ $distributor->status==1 ? 'label-success' : 'label-warning' }}">{{ $distributor->status==1 ? 'Aktif' : 'Non Aktif' }}</span></td>
                         <td>
                             <a href="{{ route('distributors.edit', $distributor->id) }}" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i> Edit</a>

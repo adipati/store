@@ -26,7 +26,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="date" class="form-control datepicker" placeholder="Tanggal Transaksi">
+                            <input type="text" name="date" class="form-control datepicker" placeholder="Tanggal Transaksi" autocomplete="off">
                         </div>
                         <button class="btn btn-sm btn-success btn-flat"><i class="fa fa-check"></i> Simpan</button>
                     </div>

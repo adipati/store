@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     @foreach ($transactions as $numb => $transaction)
-                    <? $total=0; ?>
+                    <?php $total=0; ?>
                         <tr>
                             <td>{{ $numb+1 }}</td>
                             <td>{{ $transaction->distributor->name }}</td>

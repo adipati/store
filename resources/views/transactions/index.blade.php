@@ -33,7 +33,7 @@
                             <td>{{ $transaction->date }}</td>
                             <td>
                                 @foreach ($transaction->orders as $order)
-                                    <? $total = $total + ($order->price*$order->quantity) ?>
+                                    <?php $total = $total + ($order->price*$order->quantity) ?>
                                 @endforeach
                                 Rp. {{ $total }}
                             </td>
